@@ -6,17 +6,17 @@
 ## Screenshots
 
 <div style="display: flex; justify-content: center;">
-  <img src="./assets/github/screenshot1.png" alt="App Screenshot" 
+  <img src="./app/assets/github/screenshot1.png" alt="App Screenshot" 
         style="display: block;
         height: 400px;
         width: '50%';
         margin: auto;"/>
-    <img src="./assets/github/screenshot1.png" alt="App Screenshot" 
+    <img src="./app/assets/github/screenshot1.png" alt="App Screenshot" 
         style="display: block;
         height: 400px;
         width: '50%';
         margin: auto;"/>    
-    <img src="./assets/github/screenshot2.png" alt="App Screenshot" 
+    <img src="./app/assets/github/screenshot2.png" alt="App Screenshot" 
         style="display: block;
         height: 400px;
         width: '50%';
