@@ -42,7 +42,7 @@ Clone the project
   git clone https://github.com/rajat258/rn-shopify.git
 ```
 
-Install rn-photobay with npm
+Install rn-shopify with npm
 
 ```bash
   cd rn-shopify
