@@ -1,6 +1,6 @@
 # rn-shopify
 
-🛍️ Welcome to react-native-shopify, a powerful shopping app built with React Native. This app offers a seamless shopping experience with multiple user login support. Explore various categories to discover a wide range of products. An app inspired by popular e-commerce platforms like Flipkart or Amazon.🚀
+🛍️ Welcome to react-native-shopify, a powerful shopping app built with React Native. This app offers a seamless shopping experience with multiple user login support. Explore various categories to discover a wide range of products. An app inspired by popular e-commerce platforms like FlipKart or Amazon.🚀
 
 
 ## Screenshots
