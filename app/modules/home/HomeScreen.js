@@ -2,7 +2,7 @@ import {View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Category} from '../category';
 import {useStorage} from '../../hooks';
-import HomeScreenStyle from './HomeScreenStyle';
+import styles from './HomeScreenStyle';
 
 const HomeScreen = () => {
   const [item, setItem] = useState([]);
@@ -17,11 +17,11 @@ const HomeScreen = () => {
 
   return (
     <>
-      {item.length !== 0 ? (
-        <View style={HomeScreenStyle.container}>
+      {item.length !== 0 && (
+        <View style={styles.container}>
           <Category />
         </View>
-      ) : null}
+      )}
     </>
   );
 };

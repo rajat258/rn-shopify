@@ -5,3 +5,4 @@ export * from './custom-drawer';
 export * from './custom-textinput';
 export * from './custom-searchbar';
 export * from './product';
+export * from './custom-image-selector';

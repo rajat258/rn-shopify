@@ -1,17 +1,20 @@
 import {StyleSheet} from 'react-native';
-import {getColors, horizontalScale, moderateScale} from '../../theme';
-import {CommonUtils} from '../../utils';
+import {getColors, moderateScale} from '../../theme';
 
-const {getOS} = CommonUtils();
-export default CustomTextInputStyle = (width, border, marginTop) =>
+const CustomTextInputStyle = (width, border, marginTop) =>
   StyleSheet.create({
-    height: getOS() === 'ios' ? horizontalScale(40) : horizontalScale(30),
-    width: width,
-    marginTop: marginTop,
-    padding: '3%',
-    borderWidth: moderateScale(border),
-    borderRadius: moderateScale(5),
-    fontSize: moderateScale(14),
-    borderColor: getColors.darkColor,
-    alignSelf: 'center',
+    container: {
+      // height: horizontalScale(40),
+      overflow: 'scroll',
+      width: width,
+      marginTop: marginTop,
+      padding: '3%',
+      borderWidth: moderateScale(border),
+      borderRadius: moderateScale(5),
+      fontSize: moderateScale(14),
+      borderColor: getColors.darkColor,
+      alignSelf: 'center',
+    },
   });
+
+export default CustomTextInputStyle;

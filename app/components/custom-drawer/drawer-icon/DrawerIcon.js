@@ -1,16 +1,16 @@
 import {TouchableOpacity} from 'react-native';
 import React from 'react';
 import {List} from 'phosphor-react-native';
-import {getColors} from '../../../theme';
-import DrawerIconStyle from './DrawerIconStyle';
+import {getColors, moderateScale} from '../../../theme';
+import styles from './DrawerIconStyle';
 
 // Menu Icon used to open/close Drawer.
 const DrawerIcon = navigation => {
   return (
     <TouchableOpacity
-      style={DrawerIconStyle}
+      style={styles.container}
       onPress={() => navigation.toggleDrawer()}>
-      <List size={24} color={getColors.background} />
+      <List size={moderateScale(24)} color={getColors.background} />
     </TouchableOpacity>
   );
 };

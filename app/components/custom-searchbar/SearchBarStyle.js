@@ -1,14 +1,20 @@
 import {StyleSheet} from 'react-native';
-import {moderateScale, verticalScale} from '../../theme';
-import {CommonUtils} from '../../utils';
-export default SearchBarStyle = StyleSheet.create({
+import {
+  getColors,
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../../theme';
+
+const SearchBarStyle = StyleSheet.create({
   container: {
     marginTop: '5%',
+    marginBottom: '2%',
     width: '90%',
     alignSelf: 'center',
     flexDirection: 'row',
     height: verticalScale(40),
-    borderWidth: moderateScale(0.5),
+    borderWidth: moderateScale(1),
     borderRadius: moderateScale(5),
   },
   searchInputContainer: {
@@ -19,4 +25,12 @@ export default SearchBarStyle = StyleSheet.create({
     justifyContent: 'center',
     marginRight: '2%',
   },
+  textInput: {
+    fontSize: moderateScale(14),
+    color: getColors.black,
+    padding: verticalScale(7),
+    paddingLeft: horizontalScale(5),
+  },
 });
+
+export default SearchBarStyle;

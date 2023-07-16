@@ -1,29 +1,38 @@
 import {StyleSheet} from 'react-native';
 import {getColors, moderateScale} from '../../../theme';
 
-export default BottomBarStyle = marginTop =>
+const BottomBarStyle = marginTop =>
   StyleSheet.create({
     container: {
-      backgroundColor: getColors.darkBlue,
       marginTop: marginTop,
+      paddingVertical: '2%',
       flexDirection: 'row',
-      marginBottom: '2%',
-    },
-    likeButton: {
-      flex: 1,
-      alignItems: 'center',
+      borderRadius: 5,
     },
     priceContainer: {
-      alignItems: 'center',
+      marginLeft: '5%',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       flex: 1,
     },
     priceText: {
-      color: getColors.black,
-      fontSize: moderateScale(20),
+      fontWeight: '800',
+      color: getColors.button,
+      fontSize: moderateScale(16),
     },
     addToCartButton: {
-      flex: 1,
+      marginRight: '5%',
+      paddingHorizontal: '5%',
       alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: moderateScale(5),
+      backgroundColor: getColors.lightBlue,
+    },
+    addText: {
+      color: getColors.black,
+      fontSize: moderateScale(12),
+      fontWeight: '500',
     },
   });
+
+export default BottomBarStyle;

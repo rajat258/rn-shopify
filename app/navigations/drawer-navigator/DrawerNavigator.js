@@ -4,12 +4,12 @@ import {AccountScreen} from '../../modules';
 import {TabNavigator} from '../bottom-tab-navigator';
 
 import {DrawerIcon} from '../../components';
-import {House, SignOut, UserFocus} from 'phosphor-react-native';
+import {House, UserFocus} from 'phosphor-react-native';
 import {getColors, moderateScale} from '../../theme';
 import {CustomDrawer} from '../../components';
-import {LogoutScreen} from '../../modules';
 
 const Drawer = createDrawerNavigator();
+
 const DrawerNavigator = () => {
   const drawerContent = ({props}) => <CustomDrawer {...props} />;
 
@@ -19,10 +19,6 @@ const DrawerNavigator = () => {
 
   const drawerIconUser = () => (
     <UserFocus color={getColors.black} size={moderateScale(24)} />
-  );
-
-  const drawerIconSignOut = () => (
-    <SignOut color={getColors.black} size={moderateScale(24)} />
   );
 
   const drawerIcon = ({navigation}) => <DrawerIcon {...navigation} />;
@@ -46,6 +42,7 @@ const DrawerNavigator = () => {
         component={TabNavigator}
         name="TabNavigator"
       />
+
       <Drawer.Screen
         options={({navigation}) => ({
           headerStyle: {backgroundColor: getColors.darkBlue},
@@ -54,13 +51,6 @@ const DrawerNavigator = () => {
         })}
         component={AccountScreen}
         name="Account"
-      />
-      <Drawer.Screen
-        options={{
-          drawerIcon: drawerIconSignOut,
-        }}
-        component={LogoutScreen}
-        name="Logout"
       />
     </Drawer.Navigator>
   );

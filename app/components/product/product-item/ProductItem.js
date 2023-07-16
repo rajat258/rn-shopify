@@ -1,23 +1,48 @@
-import {Image, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
 import {BottomBar} from '../bottom-bar';
+import styles from './ProductItemStyle';
+import {HeartStraight, Star} from 'phosphor-react-native';
+import {getColors, moderateScale} from '../../../theme';
 import {useNavigation} from '@react-navigation/native';
-import ProductItemStyle from './ProductItemStyle';
 
 const ProductItem = ({product}) => {
+  const [liked, setLiked] = useState(false);
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('ProductDetails', {product})}
-      style={ProductItemStyle.container}>
+      style={styles.container}>
+      <View style={styles.ratingLikeContainer}>
+        <View style={styles.ratingContainer}>
+          <Text style={styles.ratingText}>{product.rating}</Text>
+          <Star
+            style={styles.star}
+            color={getColors.black}
+            size={moderateScale(20)}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => setLiked(!liked)}
+          style={styles.likeButton}>
+          {!liked && <HeartStraight size={moderateScale(24)} />}
+          {liked && (
+            <HeartStraight weight="fill" color="red" size={moderateScale(24)} />
+          )}
+        </TouchableOpacity>
+      </View>
       <Image
         resizeMode="contain"
-        style={ProductItemStyle.productImage}
-        source={product.productImage}
+        style={styles.productImage}
+        source={{uri: product.thumbnail}}
       />
-      <Text style={ProductItemStyle.productName}>{product.productName}</Text>
-      <BottomBar product={product} />
+      <View style={styles.titleContainer}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
+          {product.title}
+        </Text>
+      </View>
+      <BottomBar {...{product}} />
     </TouchableOpacity>
   );
 };

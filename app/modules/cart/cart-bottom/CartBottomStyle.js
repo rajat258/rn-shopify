@@ -4,26 +4,21 @@ import {getColors, moderateScale} from '../../../theme';
 export default CartBottomStyle = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginBottom: '2%',
+    marginVertical: '2%',
   },
   plusMinus: {
-    marginLeft: '2%',
     flex: 1,
+    marginLeft: '2%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
-  incrementItem: {
-    backgroundColor: getColors.darkBlue,
-    width: '30%',
+  plusMinusButton: {
+    padding: moderateScale(2),
     alignItems: 'center',
-    borderRadius: moderateScale(5),
-  },
-  decrementItem: {
-    backgroundColor: getColors.darkBlue,
-    width: '30%',
-    alignItems: 'center',
-    borderRadius: moderateScale(5),
+    borderWidth: moderateScale(1),
+    borderColor: getColors.black,
+    borderRadius: moderateScale(50),
   },
   totalItemContainer: {
     paddingHorizontal: '10%',
@@ -32,18 +27,10 @@ export default CartBottomStyle = StyleSheet.create({
   },
   totalItem: {
     color: getColors.black,
+    fontSize: moderateScale(14),
   },
-  priceContainer: {
-    alignItems: 'center',
+  deleteButton: {
+    marginRight: '5%',
     justifyContent: 'center',
-    flex: 1,
-  },
-  priceText: {
-    color: getColors.black,
-    fontSize: moderateScale(20),
-  },
-  addToCartButton: {
-    flex: 1,
-    alignItems: 'center',
   },
 });

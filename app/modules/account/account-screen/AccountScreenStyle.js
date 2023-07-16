@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {getColors, moderateScale} from '../../../theme';
 
-export default AccountScreenStyle = StyleSheet.create({
+const AccountScreenStyle = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -31,3 +31,5 @@ export default AccountScreenStyle = StyleSheet.create({
     borderRadius: moderateScale(5),
   },
 });
+
+export default AccountScreenStyle;

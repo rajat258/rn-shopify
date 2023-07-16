@@ -7,3 +7,5 @@ export {
   height,
   width,
 } from './Metrics';
+export {default as randomColor} from './randomColor';
+export {default as complimentColor} from './complimentColor';

@@ -6,6 +6,7 @@ import {Minus, Plus, Trash} from 'phosphor-react-native';
 import {useStorage} from '../../../hooks';
 import {Strings} from '../../../constants';
 import {AlertBox} from '../../../components';
+import {moderateScale} from '../../../theme';
 
 const CartBottom = ({item, cart, setCart, setTotalAmount, totalAmount}) => {
   const {getAsyncId, setAsyncId} = useStorage();
@@ -14,7 +15,8 @@ const CartBottom = ({item, cart, setCart, setTotalAmount, totalAmount}) => {
     (async () => {
       let activeUser = await getAsyncId();
       setTotalAmount(
-        totalAmount - parseFloat(item.productPrice) * parseInt(item.totalItem),
+        totalAmount -
+          parseFloat(item.discountedPrice) * parseInt(item.totalItem),
       );
 
       let temp = activeUser.cart.filter(e => e.id !== item.id);
@@ -30,13 +32,13 @@ const CartBottom = ({item, cart, setCart, setTotalAmount, totalAmount}) => {
   const incrementItem = () => {
     (async () => {
       let activeUser = await getAsyncId();
-      if (item.totalItem < 10) {
+      if (item.totalItem < item.stock) {
         item.totalItem++;
         setCart([...cart]);
         const index = activeUser.cart.map(e => e.id).indexOf(item.id);
         activeUser.cart[index].totalItem++;
 
-        setTotalAmount(totalAmount + parseFloat(item.productPrice));
+        setTotalAmount(totalAmount + parseFloat(item.discountedPrice));
         await setAsyncId(activeUser);
       } else {
         AlertBox(`${Strings.outOfStock}`, `${Strings.noStock}`);
@@ -53,7 +55,7 @@ const CartBottom = ({item, cart, setCart, setTotalAmount, totalAmount}) => {
         const index = activeUser.cart.map(e => e.id).indexOf(item.id);
         activeUser.cart[index].totalItem--;
 
-        const temp_amount = totalAmount - parseFloat(item.productPrice);
+        const temp_amount = totalAmount - parseFloat(item.discountedPrice);
         setTotalAmount(temp_amount);
         await setAsyncId(activeUser);
       } else {
@@ -66,9 +68,9 @@ const CartBottom = ({item, cart, setCart, setTotalAmount, totalAmount}) => {
     <View style={CartBottomStyle.container}>
       <View style={CartBottomStyle.plusMinus}>
         <TouchableOpacity
-          style={CartBottomStyle.incrementItem}
+          style={CartBottomStyle.plusMinusButton}
           onPress={incrementItem}>
-          <Plus />
+          <Plus size={moderateScale(12)} />
         </TouchableOpacity>
 
         <View style={CartBottomStyle.totalItemContainer}>
@@ -76,22 +78,15 @@ const CartBottom = ({item, cart, setCart, setTotalAmount, totalAmount}) => {
         </View>
 
         <TouchableOpacity
-          style={CartBottomStyle.decrementItem}
+          style={CartBottomStyle.plusMinusButton}
           onPress={decrementItem}>
-          <Minus />
+          <Minus size={moderateScale(12)} />
         </TouchableOpacity>
       </View>
-
-      <View style={CartBottomStyle.priceContainer}>
-        <Text style={CartBottomStyle.priceText}>
-          {Strings.dollar} {item.productPrice}
-        </Text>
-      </View>
-
       <TouchableOpacity
         onPress={deleteItem}
-        style={CartBottomStyle.addToCartButton}>
-        <Trash size={32} />
+        style={CartBottomStyle.deleteButton}>
+        <Trash weight="fill" size={moderateScale(22)} />
       </TouchableOpacity>
     </View>
   );

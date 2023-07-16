@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export default LoginImageStyle = StyleSheet.create({
+const LoginImageStyle = StyleSheet.create({
   container: {
     height: '40%',
     alignItems: 'center',
@@ -11,3 +11,5 @@ export default LoginImageStyle = StyleSheet.create({
     height: '100%',
   },
 });
+
+export default LoginImageStyle;

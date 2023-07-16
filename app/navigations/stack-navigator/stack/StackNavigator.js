@@ -8,6 +8,7 @@ import {
 } from '../../../modules';
 import {DrawerIcon} from '../../../components';
 import {moderateScale, getColors} from '../../../theme';
+import {TabStackNavigator} from '../../bottom-tab-navigator/stack-navigator';
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -17,9 +18,6 @@ const StackNavigator = () => {
       screenOptions={{headerTitleStyle: {fontSize: moderateScale(16)}}}>
       <Stack.Screen
         options={({navigation}) => ({
-          tabBarActiveTintColor: getColors.black,
-          tabBarInactiveTintColor: getColors.button,
-          tabBarActiveBackgroundColor: getColors.darkBlue,
           headerStyle: {backgroundColor: getColors.darkBlue},
           headerLeft: () => drawerIcon({navigation}),
         })}
@@ -29,7 +27,7 @@ const StackNavigator = () => {
       <Stack.Screen
         options={{
           headerStyle: {backgroundColor: getColors.darkBlue},
-          headerBackTitleStyle: {color: 'white'},
+          headerBackTitleStyle: {color: getColors.white},
         }}
         component={ProductScreen}
         name="Product"
@@ -37,7 +35,7 @@ const StackNavigator = () => {
       <Stack.Screen
         options={{
           headerStyle: {backgroundColor: getColors.darkBlue},
-          headerBackTitleStyle: {color: 'white'},
+          headerBackTitleStyle: {color: getColors.white},
         }}
         component={ProductDetailedScreen}
         name="ProductDetails"

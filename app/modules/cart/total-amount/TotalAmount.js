@@ -1,6 +1,6 @@
 import {Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-import TotalAmountStyle from './TotalAmountStyle';
+import styles from './TotalAmountStyle';
 import {Strings} from '../../../constants';
 
 const TotalAmount = ({setTotalAmount, totalAmount}) => {
@@ -11,8 +11,8 @@ const TotalAmount = ({setTotalAmount, totalAmount}) => {
   }, [totalAmount]);
 
   return (
-    <View style={TotalAmountStyle.container}>
-      <Text style={TotalAmountStyle.text}>
+    <View style={styles.container}>
+      <Text style={styles.text}>
         {Strings.totalAmount} : {Strings.dollar} {totalAmount.toFixed(2)}
       </Text>
     </View>

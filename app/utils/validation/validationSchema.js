@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 const re_email =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
 
-export default validationSchema = {
+const validationSchema = {
   userDetails: object().shape({
     name: Yup.string()
       .required('This is required field.')
@@ -30,4 +30,18 @@ export default validationSchema = {
       .required('This is required field.')
       .min(8, 'Password should have minimum 8 characters.'),
   }),
+
+  signup: object().shape({
+    email: Yup.string()
+      .required('This is required field.')
+      .matches(re_email, 'Not an email.'),
+    password: Yup.string()
+      .required('This is required field.')
+      .min(8, 'Password should have minimum 8 characters.'),
+    confirmPassword: Yup.string()
+      .required('This is required field.')
+      .min(8, 'Password should have minimum 8 characters.'),
+  }),
 };
+
+export default validationSchema;

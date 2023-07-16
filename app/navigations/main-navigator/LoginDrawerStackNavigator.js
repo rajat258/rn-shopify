@@ -1,38 +1,46 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, AppState, StyleSheet} from 'react-native';
 import {useStorage} from '../../hooks';
+import {LoginScreen, SignupScreen} from '../../modules';
 import {moderateScale, verticalScale} from '../../theme';
-import {LoginDrawer} from '../stack-navigator';
-import {DrawerLogin} from '../stack-navigator';
+import {DrawerNavigator} from '../drawer-navigator';
+
+const Stack = createStackNavigator();
 
 const LoginDrawerStackNavigator = () => {
-  const [load, setLoad] = useState(true);
-  const [screen, setScreen] = useState(false);
+  const [screen, setScreen] = useState();
   const {getAsyncId} = useStorage();
 
   useEffect(() => {
     (async () => {
       const activeUser = await getAsyncId();
       if (activeUser) {
-        setScreen(true);
+        setScreen('DrawerNavigator');
+      } else {
+        setScreen('Login');
       }
-      setLoad(false);
     })();
   }, [AppState.currentState]);
 
   return (
     <>
-      {!load ? (
-        screen ? (
-          <DrawerLogin />
-        ) : (
-          <LoginDrawer />
-        )
+      {screen ? (
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName={screen}
+            screenOptions={{headerShown: false}}>
+            <Stack.Screen component={DrawerNavigator} name="DrawerNavigator" />
+            <Stack.Screen component={LoginScreen} name="Login" />
+            <Stack.Screen component={SignupScreen} name="Signup" />
+          </Stack.Navigator>
+        </NavigationContainer>
       ) : (
         <ActivityIndicator
           size={moderateScale(20)}
           style={styles.ActivityIndicator}
-          animating={load}
+          animating={true}
         />
       )}
     </>

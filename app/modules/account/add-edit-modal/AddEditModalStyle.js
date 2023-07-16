@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {getColors} from '../../../theme';
+import {getColors, verticalScale} from '../../../theme';
 
-export default AddEditModalStyle = StyleSheet.create({
+const AddEditModalStyle = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: '50%',
+    paddingTop: verticalScale(150),
     backgroundColor: getColors.background,
+    alignItems: 'center',
   },
   errorText: {
     position: 'relative',
@@ -13,3 +14,5 @@ export default AddEditModalStyle = StyleSheet.create({
     color: 'red',
   },
 });
+
+export default AddEditModalStyle;

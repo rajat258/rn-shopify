@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getColors, moderateScale} from '../../theme';
-export default CustombuttonStyle = (align, marginBottom) =>
+const CustombuttonStyle = (align, marginBottom) =>
   StyleSheet.create({
     container: {
       marginBottom: marginBottom,
@@ -16,3 +16,5 @@ export default CustombuttonStyle = (align, marginBottom) =>
       fontSize: moderateScale(14),
     },
   });
+
+export default CustombuttonStyle;

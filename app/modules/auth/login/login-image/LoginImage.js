@@ -2,14 +2,14 @@ import {Image, View} from 'react-native';
 import React from 'react';
 import {getColors} from '../../../../theme';
 import images from '../../../../assets/images';
-import LoginImageStyle from './LoginImageStyle';
+import styles from './LoginImageStyle';
 
 const LoginImage = () => {
   return (
-    <View style={LoginImageStyle.container}>
+    <View style={styles.container}>
       <Image
         resizeMode="contain"
-        style={LoginImageStyle.image}
+        style={styles.image}
         tintcolor={getColors.background}
         source={images.login}
       />

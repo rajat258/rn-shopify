@@ -14,40 +14,34 @@ const ViewModal = ({isVisible, setIsVisible, userDetails}) => {
         <View style={ViewModalStyle.container}>
           <CloseButton {...{setIsVisible}} />
           <View style={ViewModalStyle.textContainer}>
-            <Text style={ViewModalStyle.headerText}>
-              {Strings.name}:
-              <Text style={ViewModalStyle.name}> {userDetails.name}</Text>
+            <Text style={ViewModalStyle.headerText}>{Strings.name}:</Text>
+            <Text style={ViewModalStyle.name}> {userDetails.name}</Text>
+          </View>
+          <View style={ViewModalStyle.textContainer}>
+            <Text style={ViewModalStyle.headerText}>{Strings.mobileNo}:</Text>
+            <Text style={ViewModalStyle.name}> {userDetails.mobileNo}</Text>
+          </View>
+          <View style={ViewModalStyle.textContainer}>
+            <Text style={ViewModalStyle.headerText}>{Strings.address}:</Text>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={ViewModalStyle.name}>
+              {' '}
+              {userDetails.address}
             </Text>
           </View>
           <View style={ViewModalStyle.textContainer}>
-            <Text style={ViewModalStyle.headerText}>
-              {Strings.mobileNo}:
-              <Text style={ViewModalStyle.name}> {userDetails.mobileNo}</Text>
-            </Text>
+            <Text style={ViewModalStyle.headerText}>{Strings.pincode}:</Text>
+            <Text style={ViewModalStyle.name}> {userDetails.pincode}</Text>
           </View>
           <View style={ViewModalStyle.textContainer}>
-            <Text style={ViewModalStyle.headerText}>
-              {Strings.address}:
-              <Text style={ViewModalStyle.name}> {userDetails.address}</Text>
-            </Text>
+            <Text style={ViewModalStyle.headerText}>{Strings.city}:</Text>
+            <Text style={ViewModalStyle.name}> {userDetails.city}</Text>
           </View>
           <View style={ViewModalStyle.textContainer}>
-            <Text style={ViewModalStyle.headerText}>
-              {Strings.pincode}:
-              <Text style={ViewModalStyle.name}> {userDetails.pincode}</Text>
-            </Text>
-          </View>
-          <View style={ViewModalStyle.textContainer}>
-            <Text style={ViewModalStyle.headerText}>
-              {Strings.city}:
-              <Text style={ViewModalStyle.name}> {userDetails.city}</Text>
-            </Text>
-          </View>
-          <View style={ViewModalStyle.textContainer}>
-            <Text style={ViewModalStyle.headerText}>
-              {Strings.state}:
-              <Text style={ViewModalStyle.name}> {userDetails.state}</Text>
-            </Text>
+            <Text style={ViewModalStyle.headerText}>{Strings.state}:</Text>
+            <Text style={ViewModalStyle.name}> {userDetails.state}</Text>
           </View>
         </View>
       ) : null}

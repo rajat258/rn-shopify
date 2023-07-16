@@ -23,10 +23,13 @@
         margin: auto;"/>
 </div>
 
+More screenshots available [here](https://imgur.com/a/yMaGRay).
+
 
 ## Features
 
 - 🔐 Multiple User Login
+- 🧠 Handled with Redux
 - 🗂️ Category Screen
 - 📦 Product Listings
 - 🛒 Shopping Cart
@@ -42,7 +45,7 @@ Clone the project
   git clone https://github.com/rajat258/rn-shopify.git
 ```
 
-Install rn-photobay with npm
+Install rn-shopify with npm
 
 ```bash
   cd rn-shopify

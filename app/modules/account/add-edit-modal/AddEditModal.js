@@ -9,10 +9,10 @@ import {
 } from '../../../components';
 
 import {CommonUtils, validationSchema} from '../../../utils';
-import {useStorage} from '../../../hooks';
-import {Formik} from 'formik';
+import {useCustomRef, useStorage} from '../../../hooks';
+import {useFormik} from 'formik';
 import {Strings} from '../../../constants';
-import AddEditModalStyle from './AddEditModalStyle';
+import styles from './AddEditModalStyle';
 
 const AddEditModal = ({
   isVisible,
@@ -24,6 +24,22 @@ const AddEditModal = ({
   const [props, setProps] = useState({});
   const {getOS} = CommonUtils();
   const {setAsyncId} = useStorage();
+  const {addressRef, cityRef, mobileRef, nameRef, pincodeRef, stateRef} =
+    useCustomRef();
+
+  const {
+    handleChange,
+    handleSubmit,
+    errors,
+    isValid,
+    setFieldTouched,
+    touched,
+    values,
+  } = useFormik({
+    enableReinitialize: true,
+    validationSchema: validationSchema.userDetails,
+    initialValues: {...props},
+  });
 
   useEffect(() => {
     if (edit) {
@@ -47,7 +63,20 @@ const AddEditModal = ({
     }
   }, [isVisible]);
 
-  const addDetails = values => {
+  const checkSubmit = () => {
+    handleSubmit();
+    if (isValid === true && values.name !== '') {
+      if (edit) {
+        editDetails(values);
+      } else {
+        addDetails(values);
+      }
+    } else {
+      AlertBox(Strings.incorrectInput, Strings.checkfield);
+    }
+  };
+
+  const addDetails = () => {
     activeUser.userDetails.push({
       ...values,
     });
@@ -55,7 +84,7 @@ const AddEditModal = ({
     setIsVisible(false);
   };
 
-  const editDetails = values => {
+  const editDetails = () => {
     activeUser.userDetails.pop();
     activeUser.userDetails.push({
       ...values,
@@ -66,132 +95,111 @@ const AddEditModal = ({
   };
 
   return (
-    <Formik
-      enableReinitialize={true}
-      validationSchema={validationSchema.userDetails}
-      initialValues={{
-        ...props,
-      }}>
-      {({
-        handleChange,
-        handleSubmit,
-        errors,
-        isValid,
-        setFieldTouched,
-        touched,
-        values,
-      }) => (
-        <Modal
-          onRequestClose={() => setIsVisible(!isVisible)}
-          transparent={true}
-          visible={isVisible}
-          animationType="slide">
-          <KeyboardAvoidingView
-            style={AddEditModalStyle.container}
-            keyboardVerticalOffset={5}
-            behavior={getOS() === 'android' ? 'position' : 'padding'}>
-            <ScrollView keyboardDismissMode="interactive">
-              <CloseButton {...{setIsVisible}} />
-              <CustomTextInput
-                handleChange={handleChange('name')}
-                onBlur={() => setFieldTouched('name')}
-                value={values.name}
-                defaultValue={props.name}
-                width="80%"
-                placeholderValue={`${Strings.enter} ${Strings.name}`}
-              />
-              {errors.name && touched.name && (
-                <Text style={AddEditModalStyle.errorText}>{errors.name}</Text>
-              )}
-              <CustomTextInput
-                handleChange={handleChange('mobileNo')}
-                onBlur={() => setFieldTouched('mobileNo')}
-                value={values.mobileNo}
-                defaultValue={props.mobileNo}
-                width="80%"
-                placeholderValue={`${Strings.enter} ${Strings.mobileNo}`}
-              />
-              {errors.mobileNo && touched.mobileNo && (
-                <Text style={AddEditModalStyle.errorText}>
-                  {errors.mobileNo}
-                </Text>
-              )}
-              <CustomTextInput
-                handleChange={handleChange('address')}
-                onBlur={() => setFieldTouched('address')}
-                value={values.address}
-                defaultValue={props.address}
-                width="80%"
-                placeholderValue={`${Strings.enter} ${Strings.address}`}
-              />
-              {errors.address && touched.address && (
-                <Text style={AddEditModalStyle.errorText}>
-                  {errors.address}
-                </Text>
-              )}
-              <CustomTextInput
-                handleChange={handleChange('pincode')}
-                onBlur={() => setFieldTouched('pincode')}
-                value={values.pincode}
-                defaultValue={props.pincode}
-                width="80%"
-                placeholderValue={`${Strings.enter} ${Strings.pincode}`}
-              />
-              {errors.pincode && touched.pincode && (
-                <Text style={AddEditModalStyle.errorText}>
-                  {errors.pincode}
-                </Text>
-              )}
-              <CustomTextInput
-                handleChange={handleChange('city')}
-                onBlur={() => setFieldTouched('city')}
-                value={values.city}
-                defaultValue={props.city}
-                width="80%"
-                placeholderValue={`${Strings.enter} ${Strings.city}`}
-              />
-              {errors.city && touched.city && (
-                <Text style={AddEditModalStyle.errorText}>{errors.city}</Text>
-              )}
-              <CustomTextInput
-                handleChange={handleChange('state')}
-                onBlur={() => setFieldTouched('state')}
-                value={values.state}
-                defaultValue={props.state}
-                width="80%"
-                placeholderValue={`${Strings.enter} ${Strings.state}`}
-              />
-              {errors.state && touched.state && (
-                <Text style={AddEditModalStyle.errorText}>{errors.state}</Text>
-              )}
-              <CustomButton
-                onPress={() => {
-                  handleSubmit();
-                  console.log(errors.name, touched.name);
-                  if (isValid === true && values.name !== '') {
-                    console.log('hey neel');
-                    if (edit) {
-                      editDetails(values);
-                    } else {
-                      addDetails(values);
-                    }
-                  } else {
-                    AlertBox(Strings.incorrectInput, Strings.checkfield);
-                  }
-                }}
-                marginBottom="3%"
-                align="center"
-                text={
-                  edit
-                    ? `${Strings.edit} ${Strings.details}`
-                    : `${Strings.add} ${Strings.details}`
-                }
-              />
-            </ScrollView>
-          </KeyboardAvoidingView>
-        </Modal>
-      )}
-    </Formik>
+    <Modal
+      onRequestClose={() => setIsVisible(!isVisible)}
+      transparent={true}
+      visible={isVisible}
+      animationType="slide">
+      <KeyboardAvoidingView
+        style={styles.container}
+        keyboardVerticalOffset={5}
+        behavior={getOS() === 'android' ? 'position' : 'padding'}>
+        <ScrollView keyboardDismissMode="interactive">
+          <CloseButton {...{setIsVisible}} />
+          <CustomTextInput
+            ref={nameRef}
+            customRef={mobileRef}
+            handleChange={handleChange('name')}
+            onBlur={() => setFieldTouched('name')}
+            value={values.name}
+            defaultValue={props.name}
+            width="80%"
+            placeholderValue={`${Strings.enter} ${Strings.name}`}
+          />
+          {errors.name && touched.name && (
+            <Text style={styles.errorText}>{errors.name}</Text>
+          )}
+          <CustomTextInput
+            keyboardType="number-pad"
+            ref={mobileRef}
+            customRef={addressRef}
+            handleChange={handleChange('mobileNo')}
+            onBlur={() => setFieldTouched('mobileNo')}
+            value={values.mobileNo}
+            defaultValue={props.mobileNo}
+            maxLength={10}
+            width="80%"
+            placeholderValue={`${Strings.enter} ${Strings.mobileNo}`}
+          />
+          {errors.mobileNo && touched.mobileNo && (
+            <Text style={styles.errorText}>{errors.mobileNo}</Text>
+          )}
+          <CustomTextInput
+            ref={addressRef}
+            customRef={pincodeRef}
+            handleChange={handleChange('address')}
+            onBlur={() => setFieldTouched('address')}
+            value={values.address}
+            defaultValue={props.address}
+            width="80%"
+            placeholderValue={`${Strings.enter} ${Strings.address}`}
+          />
+          {errors.address && touched.address && (
+            <Text style={styles.errorText}>{errors.address}</Text>
+          )}
+          <CustomTextInput
+            keyboardType="number-pad"
+            ref={pincodeRef}
+            customRef={cityRef}
+            handleChange={handleChange('pincode')}
+            onBlur={() => setFieldTouched('pincode')}
+            value={values.pincode}
+            defaultValue={props.pincode}
+            width="80%"
+            placeholderValue={`${Strings.enter} ${Strings.pincode}`}
+          />
+          {errors.pincode && touched.pincode && (
+            <Text style={styles.errorText}>{errors.pincode}</Text>
+          )}
+          <CustomTextInput
+            ref={cityRef}
+            customRef={stateRef}
+            handleChange={handleChange('city')}
+            onBlur={() => setFieldTouched('city')}
+            value={values.city}
+            defaultValue={props.city}
+            width="80%"
+            placeholderValue={`${Strings.enter} ${Strings.city}`}
+          />
+          {errors.city && touched.city && (
+            <Text style={styles.errorText}>{errors.city}</Text>
+          )}
+          <CustomTextInput
+            ref={stateRef}
+            onSubmit={checkSubmit}
+            handleChange={handleChange('state')}
+            onBlur={() => setFieldTouched('state')}
+            value={values.state}
+            defaultValue={props.state}
+            width="80%"
+            placeholderValue={`${Strings.enter} ${Strings.state}`}
+          />
+          {errors.state && touched.state && (
+            <Text style={styles.errorText}>{errors.state}</Text>
+          )}
+          <CustomButton
+            onPress={checkSubmit}
+            marginBottom="3%"
+            align="center"
+            text={
+              edit
+                ? `${Strings.edit} ${Strings.details}`
+                : `${Strings.add} ${Strings.details}`
+            }
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </Modal>
   );
 };
 

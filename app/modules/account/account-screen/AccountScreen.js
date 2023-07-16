@@ -1,6 +1,6 @@
 import {Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import AccountScreenStyle from './AccountScreenStyle';
+import styles from './AccountScreenStyle';
 
 import {AddEditModal} from '../add-edit-modal';
 import {ViewModal} from '../view-modal';
@@ -32,12 +32,12 @@ const AccountScreen = () => {
   };
 
   return (
-    <View style={AccountScreenStyle.container}>
-      {activeUser.length !== 0 ? (
+    <View style={styles.container}>
+      {activeUser.length !== 0 && (
         <>
-          <Text style={AccountScreenStyle.welcome}>{Strings.welcome}</Text>
-          <Text style={AccountScreenStyle.email}>{activeUser.email}</Text>
-          <View style={AccountScreenStyle.buttonContainer}>
+          <Text style={styles.welcome}>{Strings.welcome}</Text>
+          <Text style={styles.email}>{activeUser.email}</Text>
+          <View style={styles.buttonContainer}>
             {activeUser.userDetails.length !== 0 ? (
               <>
                 <TouchableOpacity
@@ -45,15 +45,15 @@ const AccountScreen = () => {
                     setEdit(true);
                     setIsVisible(true);
                   }}
-                  style={AccountScreenStyle.button}>
-                  <Text style={AccountScreenStyle.credentials}>
+                  style={styles.button}>
+                  <Text style={styles.credentials}>
                     {Strings.edit} {Strings.details}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => setView(true)}
-                  style={AccountScreenStyle.button}>
-                  <Text style={AccountScreenStyle.credentials}>
+                  style={styles.button}>
+                  <Text style={styles.credentials}>
                     {Strings.view} {Strings.details}
                   </Text>
                 </TouchableOpacity>
@@ -61,8 +61,8 @@ const AccountScreen = () => {
             ) : (
               <TouchableOpacity
                 onPress={() => setIsVisible(true)}
-                style={AccountScreenStyle.button}>
-                <Text style={AccountScreenStyle.credentials}>
+                style={styles.button}>
+                <Text style={styles.credentials}>
                   {Strings.add} {Strings.details}
                 </Text>
               </TouchableOpacity>
@@ -75,7 +75,7 @@ const AccountScreen = () => {
             <AddEditModal {...props} />
           </View>
         </>
-      ) : null}
+      )}
     </View>
   );
 };

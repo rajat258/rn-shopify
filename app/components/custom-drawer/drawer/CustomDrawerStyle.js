@@ -1,25 +1,26 @@
 import {StyleSheet} from 'react-native';
 import {getColors, moderateScale} from '../../../theme';
 
-export default CustomDrawerStyle = StyleSheet.create({
+const CustomDrawerStyle = StyleSheet.create({
   container: {
     flex: 1,
   },
   customItem: {
-    height: '10%',
     width: '100%',
-    backgroundColor: '#cae4fa',
+    backgroundColor: getColors.background,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  Image: {
-    flex: 1,
+  flexRow: {
+    flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: '5%',
   },
+
   informationContainer: {
+    paddingVertical: '2%',
     flexDirection: 'column',
-    flex: 7,
-    alignItems: 'flex-start',
     justifyContent: 'center',
   },
   text: {
@@ -32,11 +33,31 @@ export default CustomDrawerStyle = StyleSheet.create({
     marginBottom: '2%',
   },
   buttonText: {
-    color: 'blue',
+    color: getColors.blue,
+    fontSize: moderateScale(14),
   },
   editButtonContainer: {
-    flex: 1,
+    alignItems: 'flex-end',
     justifyContent: 'center',
     marginRight: '2%',
   },
+  logoutContainer: {
+    marginTop: '5%',
+    width: '50%',
+    backgroundColor: getColors.background,
+    alignSelf: 'center',
+    paddingVertical: '5%',
+    flexDirection: 'row',
+    borderRadius: moderateScale(5),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: '10%',
+  },
+  logoutText: {
+    fontSize: moderateScale(16),
+    color: getColors.black,
+    fontWeight: '500',
+  },
 });
+
+export default CustomDrawerStyle;

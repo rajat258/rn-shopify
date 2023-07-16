@@ -1,6 +1,6 @@
 import {Modal, SafeAreaView, TextInput} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import EditCredentialsStyle from './EditCredentialsStyle';
+import styles from './EditCredentialsStyle';
 
 import {CustomButton, CloseButton, AlertBox} from '../../../components';
 import {CommonUtils} from '../../../utils';
@@ -18,6 +18,10 @@ const EditCredentials = ({isVisible, setIsVisible, activeUser}) => {
     setEmail(activeUser?.email);
     setPassword(activeUser?.password);
   }, [activeUser]);
+
+  const okFunction = () => {
+    setIsVisible(false);
+  };
 
   const editCredentials = () => {
     if (checkEmail(email) && password.length > 7) {
@@ -37,7 +41,11 @@ const EditCredentials = ({isVisible, setIsVisible, activeUser}) => {
         } else {
           const user = data.filter(e => e.email === email);
           if (user.length > 0) {
-            AlertBox('Already Used', 'This Email-Id is already in use');
+            AlertBox(
+              'Already Used',
+              'This Email-Id is already in use',
+              okFunction,
+            );
           } else {
             const user2 = data.filter(e => e.email !== activeUser.email);
             const addUser = [...user2, temp];
@@ -58,11 +66,12 @@ const EditCredentials = ({isVisible, setIsVisible, activeUser}) => {
       transparent={true}
       visible={isVisible}
       animationType="fade">
-      <SafeAreaView style={EditCredentialsStyle.container}>
+      <SafeAreaView style={styles.container}>
         <CloseButton {...{setIsVisible}} />
 
         <TextInput
-          style={EditCredentialsStyle.textInput}
+          autoCapitalize="none"
+          style={styles.textInput}
           defaultValue={activeUser?.email}
           onChangeText={val => setEmail(val)}
           placeholderTextColor={getColors.grey}
@@ -70,7 +79,8 @@ const EditCredentials = ({isVisible, setIsVisible, activeUser}) => {
         />
 
         <TextInput
-          style={EditCredentialsStyle.textInput}
+          autoCapitalize="none"
+          style={styles.textInput}
           defaultValue={activeUser?.password}
           placeholderTextColor={getColors.grey}
           placeholder={`${Strings.enter} ${Strings.password}`}

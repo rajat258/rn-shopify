@@ -8,6 +8,7 @@ export default EditCredentialsStyle = StyleSheet.create({
     backgroundColor: getColors.background,
   },
   textInput: {
+    color: getColors.black,
     width: '80%',
     marginTop: '5%',
     padding: '3%',

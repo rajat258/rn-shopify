@@ -41,11 +41,40 @@ const LoginScreenStyle = StyleSheet.create({
   errorText: {
     position: 'relative',
     color: 'red',
+    fontSize: moderateScale(14),
   },
   ActivityIndicator: {
     position: 'absolute',
     marginTop: '15%',
     marginLeft: '35%',
+  },
+  forgotPassword: {
+    marginTop: '1%',
+    alignItems: 'flex-end',
+  },
+  forgotPasswordText: {
+    fontSize: moderateScale(14),
+    fontWeight: '600',
+    color: getColors.text,
+  },
+  noAccountContainer: {
+    marginTop: '2%',
+    flexDirection: 'row',
+  },
+  noAccountText: {
+    color: getColors.grey,
+    fontSize: moderateScale(16),
+    fontWeight: '300',
+  },
+  signupButton: {
+    marginLeft: '1%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  signupButtonText: {
+    color: getColors.text,
+    fontSize: moderateScale(14),
+    fontWeight: '700',
   },
 });
 

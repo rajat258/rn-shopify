@@ -1,5 +1,9 @@
 import {StyleSheet} from 'react-native';
 
-export default DrawerIconStyle = StyleSheet.create({
-  marginLeft: '5%',
+const DrawerIconStyle = StyleSheet.create({
+  container: {
+    marginLeft: '5%',
+  },
 });
+
+export default DrawerIconStyle;
